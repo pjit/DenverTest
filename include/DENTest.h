@@ -14,5 +14,9 @@
 //
 void testDENVector();
 
+//
+//
+//
+void testDENParticle();
 
 #endif

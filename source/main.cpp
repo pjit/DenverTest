@@ -13,6 +13,8 @@ int main(int argc, const char * argv[])
 {
     // DENVector test
     testDENVector();
+    // DENParticle test
+    testDENParticle();
         
     return 0;
 }
