@@ -33,7 +33,7 @@ void testDENEq(const std::string& str, const DENReal& actualValue, const DENReal
         std::cout << str << "->Passed\n";
     }
     else {
-        std::cout << str << "->**FAILED**\n";
+        std::cout << str << "\n\tExpected:" << expected << " Actual:" << actualValue << " ->**FAILED**\n";
     }
 }
 
@@ -55,62 +55,66 @@ void testDENVector()
     
     testDENVectorEq("reset", v, 0, 0, 0);
     
+    v.reset(9, 10, 11);
+    
+    testDENVectorEq("reset to non-zero", v, 9, 10, 11);
+    
     DENVector v2(1, -2, 3);
     
     testDENEq("squaremagnitude", v2.squareMagnitude(), 14);
     
     testDENEq("magnitude", v2.magnitude(), sqrt(14));
     
-    DENVector v3(3,1,2);
+    v2.reset(3,1,2);
     
-    v3.normalize();
+    v2.normalize();
 
-    testDENVectorEq("normalize", v3, 0.8017837257372732, 0.2672612419124244, 0.5345224838248488);
+    testDENVectorEq("normalize", v2, 0.8017837257372732, 0.2672612419124244, 0.5345224838248488);
     
-    DENVector v4(4,5,6);
+    v2.reset(4,5,6);
     
-    DENVector v5;
+    DENVector v3;
     
-    v5 = v4;
+    v3 = v2;
     
-    testDENVectorEq("assignment", v5, 4,5,6);
+    testDENVectorEq("assignment", v3, 4,5,6);
     
-    DENVector v6(v5);
+    DENVector v4(v3);
     
-    testDENVectorEq("copy-constructed", v6, 4,5,6);
+    testDENVectorEq("copy-constructed", v4, 4,5,6);
     
-    v4 = v5 + v6;
+    v4 = v3 + v4;
     
     testDENVectorEq("add vectors + op", v4, 8, 10, 12);
     
-    DENVector v7(1,2,3);
-    DENVector v8(4,5,6);
+    v.reset(1,2,3);
+    v2.reset(4,5,6);
     
-    DENVector addedVector = DENVector::add(v7, v8);
+    DENVector addedVector = DENVector::add(v, v2);
     
     testDENVectorEq("add vectors", addedVector, 5, 7, 9);
-    testDENVectorEq("add vectors - original (left operand) unchanged", v7, 1, 2, 3);
-    testDENVectorEq("add vectors - original (right operand) unchanged", v8, 4, 5, 6);
+    testDENVectorEq("add vectors - original (left operand) unchanged", v, 1, 2, 3);
+    testDENVectorEq("add vectors - original (right operand) unchanged", v2, 4, 5, 6);
     
-    DENVector v9(2,-3,7);
-    DENVector v10(-4,2,-4);
+    v.reset(2,-3,7);
+    v2.reset(-4,2,-4);
     
-    DENReal scalarProduct = DENVector::scalarProduct(v9, v10);
+    DENReal scalarProduct = DENVector::scalarProduct(v, v2);
     
     testDENEq("scalar product", scalarProduct, -42);
     
-    DENVector v11(1,2,3);
-    DENVector v12(4,5,6);
+    v.reset(1,2,3);
+    v2.reset(4,5,6);
     
-    DENVector vectorProduct = DENVector::vectorProduct(v11, v12);
+    DENVector vectorProduct = DENVector::vectorProduct(v, v2);
     
     testDENVectorEq("vector product", vectorProduct, -3, 6, -3);
     
-    DENVector v13(2,4,0);
+    v.reset(2,4,0);
     
-    DENVector normalVector = DENVector::normal(v13);
+    DENVector normalVector = DENVector::normal(v);
     
-    testDENVectorEq("normal to a given vector", normalVector, 1/sqrt(5), 2/sqrt(5), 0);
+    testDENVectorEq("normal to a given vector", normalVector, 1.0/sqrt(5), 2.0/sqrt(5), 0);
     
     testDENEq("normal vector should have magnitude 1", normalVector.magnitude(), 1);
 }
