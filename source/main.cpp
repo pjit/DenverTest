@@ -11,11 +11,13 @@
 
 int main(int argc, const char * argv[])
 {
-    // DENVector test
-    testDENVector();
-    // DENParticle test
-    testDENParticle();
-        
-    return 0;
+	// DENVector test
+	testDENVector();
+	// DENParticle test
+	testDENParticle();
+	// Gravity force test
+	testDENParticleForceGravity();
+	
+	return 0;
 }
 

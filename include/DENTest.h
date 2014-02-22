@@ -9,14 +9,30 @@
 #ifndef DenverTest_DENTest_h
 #define DenverTest_DENTest_h
 
-//
-// DENVector test
-//
-void testDENVector();
+#include <string>
+#include "DENUtils.h"
+
+class DENVector;
 
 //
 //
 //
+void testDENVectorEq(const std::string&, const DENVector&,
+                     const DENReal&, const DENReal&, const DENReal&);
+void testDENVectorEq(const std::string&, const DENVector&, const DENVector&);
+void testDENEq(const std::string&, const DENReal&, const DENReal&);
+
+//
+// DENVector test
+//
+void testDENVector();
+//
+// DENParticle Tests
+//
 void testDENParticle();
+//
+//
+//
+void testDENParticleForceGravity();
 
 #endif
